@@ -29,9 +29,9 @@
 - name: Installing plex
   command: "dpkg -i {{ plex_deb_path }}"
   when: result|failed
-- name: Ensure the Unofficial Plex App Store is installed
-  command: git clone {{ app_store_repo }} "{{ plex_application_support_dir }}/Plug-ins/AppStore.bundle"
-           creates="{{ plex_application_support_dir }}/Plug-ins/AppStore.bundle"
+#- name: Ensure the Unofficial Plex App Store is installed
+#  command: git clone {{ app_store_repo }} "{{ plex_application_support_dir }}/Plug-ins/AppStore.bundle"
+#           creates="{{ plex_application_support_dir }}/Plug-ins/AppStore.bundle"
 
 # Start it
 - name: Ensure plex is running
