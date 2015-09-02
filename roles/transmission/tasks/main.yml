@@ -11,6 +11,6 @@
   when: installed|changed
 - name: Ensure download dir exists
   file: path={{ transmission_download_dir }}
-        owner={{ user }} group={{ user_group }} state=directory mode=0775
+        owner={{ user }} group={{ user_group }} state=directory mode=0777
 - name: Ensure transmission is running
   service: name=transmission-daemon state=started enabled=yes
