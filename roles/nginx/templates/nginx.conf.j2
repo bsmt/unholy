@@ -22,7 +22,7 @@ http {
         server_name {{ server_name }};
 
         # Redirect to SSL
-        rewrite ^ https://$server_name$request_uri? permanent;
+        rewrite ^ https://$host$request_uri? permanent;
     }
 
     server {
