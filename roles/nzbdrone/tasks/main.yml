@@ -32,7 +32,7 @@
 - name: Block connections to NZBDrone from world
   #ufw: rule=deny port={{ nzbdrone_port }}
   command: "ufw deny 8011"
-- name: Allow conncetions to NZBDrone from localhost
+- name: Allow connections to NZBDrone from localhost
   #ufw: rule=allow port={{ nzbdrone_port }} src=127.0.0.1
   command: "ufw allow from 127.0.0.1 to any port 8011"
 - name: Default ufw to allow connections.
