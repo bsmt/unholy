@@ -11,15 +11,23 @@
 - name: Configure nginx.conf
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
             owner=root group=root mode=0644
+  notify:
+    - restart nginx
 - name: Configure nginx services.conf
   template: src=services.conf.j2 dest=/etc/nginx/services.conf
             owner=root group=root mode=0644
+  notify:
+    - restart nginx
 - name: Configure nginx proxy-control.conf
   template: src=proxy-control.conf.j2 dest=/etc/nginx/proxy-control.conf
             owner=root group=root mode=0644
+  notify:
+    - restart nginx
 - name: Configure nginx auth-basic.conf
   template: src=auth-basic.conf.j2 dest=/etc/nginx/auth-basic.conf
             owner=root group=root mode=0644
+  notify:
+    - restart nginx
 - name: Configure nginx .htpasswd users file
   htpasswd: path=/etc/nginx/.htpasswd name={{ htpasswd_name }}
             password={{ htpasswd_password }}
