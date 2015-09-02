@@ -29,16 +29,5 @@
   template: src=config.xml.j2 dest="{{ nzbdrone_home }}/.config/NzbDrone/config.xml"
 - name: Install NZBDrone upstart script (ubuntu 14.04 or earlier)
   template: src=nzbdrone.conf.j2 dest=/etc/init/nzbdrone.conf
-- name: Block connections to NZBDrone from world
-  #ufw: rule=deny port={{ nzbdrone_port }}
-  command: "ufw deny 8011"
-- name: Allow connections to NZBDrone from localhost
-  #ufw: rule=allow port={{ nzbdrone_port }} src=127.0.0.1
-  command: "ufw allow from 127.0.0.1 to any port 8011"
-- name: Default ufw to allow connections.
-  command: "ufw default allow"
-- name: Ensure ufw is running.
-  #ufw: state=enabled
-  command: "ufw enable"
 - name: Ensure NZBDrone is running
   service: name=nzbdrone state=started
