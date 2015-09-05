@@ -19,15 +19,15 @@ http {
 
     server {
         listen 80;
-        server_name {{ server_name }};
+        server_name _;
 
         # Redirect to SSL
-        rewrite ^ https://$server_name$request_uri? permanent;
+        rewrite ^ https://$host$request_uri? permanent;
     }
 
     server {
         listen 443;
-        server_name {{ server_name }};
+        server_name _;
 
         ssl on;
         ssl_certificate {{ nginx_ssl_cert }};

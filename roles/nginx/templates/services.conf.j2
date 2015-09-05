@@ -2,6 +2,7 @@
 # Sickbeard
 location {{ sickbeard_webroot }} {
         proxy_pass        http://localhost:{{ sickbeard_port }}{{ sickbeard_webroot }}/;
+        proxy_redirect    http://localhost:{{ sickbeard_port }}{{ sickbeard_webroot }}/ https://$host{{ sickbeard_webroot }};
         include           proxy-control.conf;
 }
 {% endif %}
@@ -10,6 +11,7 @@ location {{ sickbeard_webroot }} {
 # Sabnzbd
 location {{ sabnzbd_webroot }} {
         proxy_pass        http://localhost:{{ sabnzbd_port }}/sabnzbd;
+        proxy_redirect    http://localhost:{{ sabnzbd_port }}/sabnzbd https://$host{{ sabnzbd_webroot }};
         include           proxy-control.conf;
 }
 {% endif %}
@@ -17,15 +19,17 @@ location {{ sabnzbd_webroot }} {
 {% if include_nzbdrone %}
 # NZBDrone
 location {{ nzbdrone_webroot }} {
-        proxy_pass        http://localhost:{{ nzbdrone_port }}{{ nzbdrone_webroot }};
+        proxy_pass        http://localhost:{{ nzbdrone_port }};
+        proxy_redirect    http://localhost:{{ nzbdrone_port }}{{ nzbdrone_webroot }} https://$host{{ nzbdrone_webroot }};
         include proxy-control.conf;
 }
 {% endif %}
 
 {% if include_couchpotato %}
 # Couchpotato
-location /{{ couchpotato_webroot }} {
-        proxy_pass        http://localhost:{{ couchpotato_port }}/{{ couchpotato_webroot }};
+location {{ couchpotato_webroot }} {
+        proxy_pass        http://localhost:{{ couchpotato_port }};
+        proxy_redirect    http://localhost:{{ couchpotato_port }} https://$host{{ couchpotato_webroot }};
         include           proxy-control.conf;
         proxy_redirect    off;
 }
@@ -35,6 +39,7 @@ location /{{ couchpotato_webroot }} {
 # Transmission
 location {{ transmission_webroot }} {
     proxy_pass http://localhost:{{ transmission_port }};
+    proxy_redirect http://localhost:{{ transmission_port }} https://$host{{ transmission_webroot }};
     proxy_pass_header X-Transmission-Session-Id;
     include proxy-control.conf;
 }
